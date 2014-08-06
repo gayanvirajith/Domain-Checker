@@ -15,6 +15,7 @@ You can install JSON, REST-CLIENT gem using following command
 - gem install rest-client
 - gem install json
 
+[License](https://github.com/gayanvirajith/Domain-Checker/blob/master/LICENSE)
 
 
 
