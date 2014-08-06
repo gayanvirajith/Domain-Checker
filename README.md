@@ -11,8 +11,8 @@ In order to run domain check script, you need to have following gems in your gem
 
 You can install JSON, REST-CLIENT gem using following command
 
-gem install rest-client
-gem install json
+- gem install rest-client
+- gem install json
 
 
 
