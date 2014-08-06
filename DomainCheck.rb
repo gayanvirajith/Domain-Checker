@@ -15,7 +15,9 @@ class DomainCheck
         # Initialize username, password and service URL
         @username, @password, @domain = user, password, domain
 
-        @url = "http://www.whoisxmlapi.com/whoisserver/WhoisService?domainName=#{@domain}&cmd=GET_DN_AVAILABILITY&username=#{@username}&password=#{@password}&outputFormat=JSON"
+        @url = "http://www.whoisxmlapi.com/whoisserver/WhoisService?" +
+                "domainName=#{@domain}&cmd=GET_DN_AVAILABILITY&" + 
+                "username=#{@username}&password=#{@password}&outputFormat=JSON"
     end
 
     # Check domain availability using RestClient helper
