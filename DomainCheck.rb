@@ -1,32 +1,26 @@
+#!/usr/bin/env ruby
+#
 require 'rubygems'
 require 'rest_client'
 require 'json'
 
 class DomainCheck 
     
-    # Username
-    @username
-
-    # Password
-    @password
-
-    # Domain you look for
-    @domain
-
-    # Service url
-    @url
-
     def initialize(user, password, domain)
+        # Initialize username, password and service URL
         @username, @password, @domain = user, password, domain
 
         @url = "http://www.whoisxmlapi.com/whoisserver/WhoisService?domainName=#{@domain}&cmd=GET_DN_AVAILABILITY&username=#{@username}&password=#{@password}&outputFormat=JSON"
     end
 
+    # Check domain availability using RestClient helper
+    # todo: handle some exceptions and error codes
     def doCheckAvailability
         response = RestClient.get(@url)
         return response.body
     end
 
+    # Get availibility output returned from api
     def getOutput
         return doCheckAvailability()
     end
@@ -51,9 +45,16 @@ class DomainCheck
     end
 end    
 
-username = 'yourusername';
-password = 'yourpassword'
-domainName = 'gayan.com' # the domain name you look for
+# api username 
+username = 'gayan';
+# api password
+password = 'eppo123'
+# the domain name you look for
+domainName = 'gayan.com'
 
+# Make DomainCheck instance with
+# your defined username, password and domain name
 client = DomainCheck.new(username, password, domainName)
+
+# Finally invoke getText() method to have some output.
 puts client.getText() 
