@@ -27,10 +27,11 @@ class DomainCheck
             response = RestClient.get(@url) { |response, request, result| 
                 case response.code
                     when 200
-                        # Response is ok
+                        # Good response
                         return response.body 
                     when 423
-                        raise "Got 423 response !"
+                        # Oops locked !
+                        raise "Oops ! The resource that is being accessed is locked"
                     else 
                         response.return!(request, result, &block)
                 end                
