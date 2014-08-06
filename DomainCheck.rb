@@ -51,9 +51,9 @@ class DomainCheck
     end
 end    
 
-username = 'gayan';
-password = 'eppo123'
-domainName = 'gayan.com'
+username = 'yourusername';
+password = 'yourpassword'
+domainName = 'gayan.com' # the domain name you look for
 
 client = DomainCheck.new(username, password, domainName)
 puts client.getText() 
