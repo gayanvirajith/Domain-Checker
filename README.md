@@ -15,6 +15,14 @@ You can install JSON, REST-CLIENT gem using following command
 - gem install rest-client
 - gem install json
 
+### How to run
+
+- Clone/Download
+- Go to terminal
+- Change the directory to cloned/downloaded path
+- Edit `username`, `password`, `domainName` as per required
+- Type `ruby DomainCheck.rb` 
+
 [License](https://github.com/gayanvirajith/Domain-Checker/blob/master/LICENSE)
 
 
