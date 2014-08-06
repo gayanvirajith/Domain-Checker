@@ -51,9 +51,9 @@ class DomainCheck
 end    
 
 # api username 
-username = 'gayan';
+username = 'username';
 # api password
-password = 'eppo123'
+password = 'password'
 # the domain name you look for
 domainName = 'gayan.com'
 
