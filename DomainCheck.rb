@@ -23,8 +23,22 @@ class DomainCheck
     # Check domain availability using RestClient helper
     # todo: handle some exceptions and error codes
     def doCheckAvailability
-        response = RestClient.get(@url)
-        return response.body
+        begin
+            response = RestClient.get(@url) { |response, request, result| 
+                case response.code
+                    when 200
+                        # Response is ok
+                        return response.body 
+                    when 423
+                        raise "Got 423 response !"
+                    else 
+                        response.return!(request, result, &block)
+                end                
+                return response.body
+            }
+        rescue SocketError => e            
+            raise "Error when fetching from #{e}"        
+        end
     end
 
     # Get availibility output returned from api
@@ -40,20 +54,32 @@ class DomainCheck
         responseHash = JSON.parse(getOutput())
 
         textOutput = "\nDomain availability infomration\n-----------------\n\n"
-        textOutput += "Results for #{@domain} \n\n"
-
-        # Loop over the json response returned and append them to the textOutput string 
-        
-        responseHash['DomainInfo'].each {|item| 
-            textOutput += "#{item[0]} status: #{item[1]}\n"
-        }   
+        unless responseHash.has_key?("ErrorMessage")  
+            textOutput += "Results for #{@domain} \n\n"
+            # Loop over the json response returned and append them to 
+            # the textOutput string         
+            responseHash['DomainInfo'].each {|item| 
+                textOutput += "#{item[0]} status: #{item[1]}\n"
+            }   
+        else
+            # Loop over the json response returned and append them to                
+            # the textOutput string         
+            textOutput += "Unable to process the request due to following error\n"                                         
+            responseHash['ErrorMessage'].each {|item|                                  
+                textOutput += "#{item[0]} : #{item[1]}\n"                      
+            }                                                  
+        end
         textOutput += "\n-----------------\n"     
         return textOutput
     end
 end    
 
+# Api credentials
+# For the whoisxmlapi.com you need to have an account first. 
+# If you are a developer you can register as developer for free.
+# http://www.whoisxmlapi.com/newaccount.php
 # api username 
-username = 'username';
+username = 'user';
 # api password
 password = 'password'
 # the domain name you look for
