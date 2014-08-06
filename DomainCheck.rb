@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
-#
+
+# Written by Gayan Virajith
+# The script looks particular domain availibility 
+# using  `WhoisAPI` - http://www.whoisxmlapi.com
+# It will output specified domain name is available or not.
+
 require 'rubygems'
 require 'rest_client'
 require 'json'
